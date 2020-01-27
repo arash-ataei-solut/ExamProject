@@ -11,7 +11,7 @@ class ProfileSerializer(HyperlinkedModelSerializer):
 
     class Mata:
         model = Profile
-        fields = ('username', 'full_name')
+        fields = ('url', 'username', 'full_name')
 
 
 class ProfileDetailsSerializer(ModelSerializer):
@@ -26,13 +26,14 @@ class ProfileDetailsSerializer(ModelSerializer):
 
     class Meta:
         model = Profile
-        fields = ('username',
-                  'full_name',
-                  'email',
-                  'birth_date',
-                  'phone',
-                  'national_code',
-                  'field_study',
-                  'grade',
-                  'marks',
-                  )
+        fields = (
+            'username',
+            'full_name',
+            'email',
+            'birth_date',
+            'phone',
+            'national_code',
+            'field_study',
+            'grade',
+            'marks',
+        )
