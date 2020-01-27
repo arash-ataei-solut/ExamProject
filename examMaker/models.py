@@ -5,6 +5,9 @@ import random
 class Category(models.Model):
     name = models.CharField(max_length=255)
 
+    def __str__(self):
+        return self.name
+
 
 class Question(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
@@ -36,6 +39,9 @@ class ExamLevel(models.Model):
     easy_questions = models.DecimalField(max_digits=2, decimal_places=0)
     time = models.DurationField()
 
+    def __str__(self):
+        return self.level_name
+
 
 class Exam(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
@@ -52,6 +58,10 @@ class Exam(models.Model):
         questions += random.choices(easy_questions, weights=None, k=self.level.easy_questions)
         for q in questions:
             MakeExam(exam=self, question=q)
+
+    @property
+    def user(self):
+        return self.mark.user
 
 
 class MakeExam(models.Model):

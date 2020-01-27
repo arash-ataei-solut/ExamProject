@@ -34,12 +34,17 @@ class Profile(models.Model):
     grade = models.CharField(max_length=1, choices=GRADE_CHOICES, null=True, blank=True)
 
     @property
-    def first_name(self):
+    def profile_username(self):
+        user = User.objects.get(profile=self)
+        return user.username
+
+    @property
+    def profile_first_name(self):
         user = User.objects.get(profile=self)
         return user.first_name
 
     @property
-    def last_name(self):
+    def profile_last_name(self):
         user = User.objects.get(profile=self)
         return user.last_name
 
@@ -53,6 +58,6 @@ class Profile(models.Model):
 
 class Marks(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='marks', related_query_name='mark')
-    exam = models.ForeignKey(Exam, on_delete=models.CASCADE)
+    exam = models.ForeignKey(Exam, on_delete=models.CASCADE, related_name='mark', related_query_name='mark')
     mark = models.DecimalField(max_digits=2, decimal_places=2)
 
