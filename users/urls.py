@@ -1,7 +1,7 @@
 from django.urls import path
 from rest_framework.routers import SimpleRouter
 
-from .views import ProfileViewSet
+from .views import ProfileViewSet, Signup
 
 
 router = SimpleRouter()
@@ -9,4 +9,6 @@ router = SimpleRouter()
 router.register('profile', ProfileViewSet)
 
 
-urlpatterns = []
+urlpatterns = [
+    path('signup/', Signup)
+]
